@@ -32,6 +32,17 @@ class ViewController: UIViewController {
         let defaults = UserDefaults.standard
         let defaultTip = defaults.integer(forKey: "defaultTip")
         tipSelect.selectedSegmentIndex = defaultTip
+        
+        let tipChoices = [0.15, 0.18, 0.2]
+        let billVal = Double(bill.text!) ?? 0
+        
+        let taxVal = billVal * 0.1
+        let tipVal = (billVal+taxVal) * tipChoices[tipSelect.selectedSegmentIndex]
+        let totVal = billVal + taxVal + tipVal
+        
+        tax.text = String.init(format: "$%.2f", taxVal)
+        tip.text = String.init(format: "$%.2f", tipVal)
+        tot.text = String.init(format: "$%.2f", totVal)
     }
     
     @IBAction func tap(_ sender: Any) {
